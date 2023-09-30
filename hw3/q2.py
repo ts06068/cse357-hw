@@ -24,7 +24,7 @@ for i in range(len(keys)):
     try:
         dictcum[keys[i]] = dictcum[keys[i - 1]] + dictfreq[keys[i]]
     except KeyError:
-        dictcum[keys[i]] = freqlist[keys[i]][1]
+        dictcum[keys[i]] = dictfreq[keys[i]]
 
 cumlist = sorted(dictcum.items(), key=lambda x: x[0])
 
@@ -40,7 +40,8 @@ for i in range(len(cumlist)):
 
 plt.figure("eCDF")
 plt.plot(X, Y, label="eCDF")
-plt.scatter(X, [0] * len(X), color="red", marker="x", s=100, label="samples")
+plt.scatter(X, Y, color="red", marker="x", s=50, label="samples")
+plt.scatter(X, [0] * len(X), color="purple", marker="x", s=50, label="samples")
 plt.xlabel("x")
 plt.ylabel("Pr[X<=x]")
 plt.legend(loc="upper left")
