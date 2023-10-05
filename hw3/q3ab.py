@@ -12,7 +12,9 @@ result = [[], [], []]
 
 samplesize = [10, 100, 1000]
 
+# for each sample size,
 for n in range(len(samplesize)):
+    # make a frequency list
     for i in range(samplesize[n]):
         num = random.randint(1, 99)
         try:
@@ -26,6 +28,7 @@ for n in range(len(samplesize)):
 
     print(freqlist)
 
+    # make a cumulative frequency list
     for i in range(len(keys)):
         try:
             dictcumList[n][keys[i]] = (
@@ -39,7 +42,7 @@ for n in range(len(samplesize)):
     print("numsamples = %d" % numsamples[n])
     print("cumlist = %s" % result[n])
 
-
+# create a x and y list for each sample size for plotting
 X = [[], [], []]
 Y = [[], [], []]
 

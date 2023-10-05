@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 dictfreq = dict()
 dictcum = dict()
 
+# make a frequency list
 with open("pokemon.csv", newline="") as csvfile:
     reader = csv.reader(csvfile, delimiter=" ", quotechar="|")
     next(reader, None)
@@ -20,6 +21,7 @@ with open("pokemon.csv", newline="") as csvfile:
 freqlist = sorted(dictfreq.items(), key=lambda x: x[0])
 keys = sorted(dictfreq.keys())
 
+# make a cumulative frequency list
 for i in range(len(keys)):
     try:
         dictcum[keys[i]] = dictcum[keys[i - 1]] + dictfreq[keys[i]]
@@ -34,9 +36,10 @@ print("cumlist = %s" % cumlist)
 X = []
 Y = []
 
+# create a x and y list for plotting
 for i in range(len(cumlist)):
-    X = X + [cumlist[i][0], cumlist[i][0]]
-    Y = Y + [cumlist[i][1] / numsamples, cumlist[i][1] / numsamples]
+    X = X + [cumlist[i][0]]
+    Y = Y + [cumlist[i][1] / numsamples]
 
 plt.figure("eCDF")
 plt.plot(X, Y, label="eCDF")
