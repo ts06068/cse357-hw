@@ -51,3 +51,8 @@ print("delta_MLE = %.5f" % delta_MLE)
 print("se_delta_MLE = %.5f" % se_delta_MLE)
 print("W = %.5f" % W)
 print("z_alpha = %.5f" % z_alpha)
+
+if W > z_alpha:
+    print("Reject H0")
+else:
+    print("Fail to reject H0")
