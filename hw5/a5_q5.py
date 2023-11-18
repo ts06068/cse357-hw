@@ -40,7 +40,10 @@ alpha = 0.05
 Z = abs((sampleMeanHeightFemaleB - sampleMeanHeightFemaleA) / (math.sqrt(v / n)))
 
 print("Z: ", Z)  # > 1.96, reject H0
-print("Z > 1.96, reject H0")
+if Z > 1.96:
+    print("Z > 1.96, reject H0")
+else:
+    print("Z < 1.96, accept H0")
 
 
 # Perform Z test for two independent population, this time male and female in settlement A
@@ -82,7 +85,10 @@ Z2 = abs(
 )
 
 print("Z: ", Z2)  # > 1.96, reject H0
-print("Z > 1.96, reject H0")
+if Z2 > 1.96:
+    print("Z > 1.96, reject H0")
+else:
+    print("Z < 1.96, accept H0")
 
 
 # Perform T test for single population in settlement B male
@@ -123,7 +129,11 @@ T = abs(
 )
 
 print("T: ", T)  # > t 0.05, 9 = 2.262, reject H0
-print("T < 2.262, accept H0")
+
+if T > 2.262:
+    print("T > 2.262, reject H0")
+else:
+    print("T < 2.262, accept H0")
 
 
 # Conduct paired T test
@@ -172,8 +182,10 @@ correctedVarianceD /= len(d) - 1
 T2 = abs(sampleMeanD / (math.sqrt(correctedVarianceD / len(d))))
 
 print("T2: ", T2)  # > t 0.05, 9 = 2.262, reject H0
-print("T2 < 2.262, accept H0")
-
+if T2 > 2.262:
+    print("T2 > 2.262, reject H0")
+else:
+    print("T2 < 2.262, accept H0")
 
 # Conduct unpaired T test for 2 independent population
 # Assumption: each X and Y are iid sample from normal distribution
@@ -236,4 +248,7 @@ T3 = abs(
 )
 
 print("T3: ", T3)  # > t 0.05, 18 = 2.101, reject H0
-print("T3 < 2.101, accept H0")
+if T3 > 2.101:
+    print("T3 > 2.101, reject H0")
+else:
+    print("T3 < 2.101, accept H0")

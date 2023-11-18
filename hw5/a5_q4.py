@@ -2,6 +2,8 @@ import csv
 import itertools
 import random
 
+from click import confirm
+
 
 def ecdf(data):
     dictfreq = dict()
@@ -101,6 +103,7 @@ for i in range(len(confirmed)):
     else:
         confirmed_humid.append(confirmed[i])
 
+
 # print("Confirmed cases: ", confirmed)
 # print("Temperature: ", temperature)
 # print("Humidity: ", humidity)
@@ -114,21 +117,19 @@ ecdf_confirmed_humid = ecdf(confirmed_humid)
 ecdf_confirmed_cold = [(-1, 0)] + ecdf_confirmed_cold
 ecdf_confirmed_warm = [(-1, 0)] + ecdf_confirmed_warm
 
-# print("eCDF for confirmed cases")
-# print("Cold: ", ecdf_confirmed_cold)
-# print("Warm: ", ecdf_confirmed_warm)
-
 # Perform KS test for ecdf_confirmed_cold and ecdf_confirmed_warm
 
+a = KSTest(ecdf_confirmed_cold, ecdf_confirmed_warm)
+b = KSTest(ecdf_confirmed_dry, ecdf_confirmed_humid)
 
 print(
     "KS test for ecdf_confirmed_cold and ecdf_confirmed_warm: ",
-    KSTest(ecdf_confirmed_cold, ecdf_confirmed_warm),
+    a,
 )
 
 print(
     "KS test for ecdf_confirmed_dry and ecdf_confirmed_humid: ",
-    KSTest(ecdf_confirmed_dry, ecdf_confirmed_humid),
+    b,
 )
 
 m = len(confirmed_cold)
@@ -139,10 +140,12 @@ Tobs = abs(
     - sum(confirmed_warm) / len(confirmed_warm)
 )
 
+print("----------------------------------")
 
 for i in [500, 1000]:
     acc = 0
     new_confirmed_cold_warm = confirmed_cold + confirmed_warm
+
     for j in range(i):
         random.shuffle(new_confirmed_cold_warm)
 
@@ -153,6 +156,9 @@ for i in [500, 1000]:
             sum(new_confirmed_cold) / len(new_confirmed_cold)
             - sum(new_confirmed_warm) / len(new_confirmed_warm)
         )
+
+        # print("Ti: ", Ti)
+        # print("Tobs: ", Tobs)
 
         if Ti > Tobs:
             acc += 1
